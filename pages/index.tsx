@@ -79,7 +79,7 @@ export default function Home() {
     <div>
       <Script src="https://code.jquery.com/jquery-1.12.4.min.js" defer />
       <Script src="https://api-test.eximbay.com/v1/javascriptSDK.js" defer />
-      <button onClick={handleClick}>Pay Now</button>
+      <button onClick={handleClick}>fgkey 생성</button>
       <button type="button" onClick={handlePayment}>
         결제 창 연동
       </button>
