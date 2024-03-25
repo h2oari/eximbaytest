@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { EximbayFgkeyRequestData, getEximbayFgkey } from "./hooks/useMutation";
+import { EximbayFgkeyRequestData, getEximbayFgkey } from "./useMutation";
 import Script from "next/script";
 
 declare global {
