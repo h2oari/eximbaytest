@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { EximbayFgkeyRequestData, getEximbayFgkey } from "../hooks/useMutation";
+import { EximbayFgkeyRequestData, getEximbayFgkey } from "./hooks/useMutation";
 import { useRouter } from "next/router";
 import Script from "next/script";
 
@@ -19,15 +19,15 @@ export default function Home() {
       return getEximbayFgkey(userData);
     },
   });
-
+  const { isSuccess, data, mutateAsync } = getEximbayFgkeyMutation;
   useEffect(() => {
-    if (getEximbayFgkeyMutation.isSuccess) {
-      setFgkey(getEximbayFgkeyMutation.data.fgkey);
+    if (isSuccess) {
+      setFgkey(data.fgkey);
     }
-  }, [getEximbayFgkeyMutation.isSuccess]);
+  }, [isSuccess]);
 
   const handleClick = async (): Promise<void> => {
-    await getEximbayFgkeyMutation.mutateAsync({
+    await mutateAsync({
       payment: {
         transaction_type: "PAYMENT",
         order_id: "20220819105102",
