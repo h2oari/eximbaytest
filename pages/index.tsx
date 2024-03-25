@@ -1,7 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { EximbayFgkeyRequestData, getEximbayFgkey } from "./hooks/useMutation";
-import { useRouter } from "next/router";
 import Script from "next/script";
 
 declare global {
@@ -13,7 +12,6 @@ declare global {
 export default function Home() {
   const [fgkey, setFgkey] = useState<string | null>(null);
 
-  const router = useRouter();
   const getEximbayFgkeyMutation = useMutation({
     mutationFn: (userData: EximbayFgkeyRequestData) => {
       return getEximbayFgkey(userData);
@@ -22,9 +20,9 @@ export default function Home() {
   const { isSuccess, data, mutateAsync } = getEximbayFgkeyMutation;
   useEffect(() => {
     if (isSuccess) {
-      setFgkey(data.fgkey);
+      setFgkey(data?.fgkey);
     }
-  }, [isSuccess]);
+  }, [isSuccess, data?.fgkey]);
 
   const handleClick = async (): Promise<void> => {
     await mutateAsync({
