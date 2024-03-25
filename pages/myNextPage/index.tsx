@@ -34,7 +34,7 @@ const usePaymentVerification = () => {
 
       router.push(url);
     }
-  }, [isSuccess]);
+  }, [isSuccess, router]);
 
   return <div>{data}</div>;
 };
