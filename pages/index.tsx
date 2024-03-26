@@ -29,9 +29,9 @@ export default function Home() {
       payment: {
         transaction_type: "PAYMENT",
         order_id: "20220819105102",
-        currency: "USD",
+        currency: "KRW",
         amount: "1",
-        lang: "EN",
+        lang: "KR",
       },
       merchant: {
         mid: "1849705C64",
@@ -53,9 +53,9 @@ export default function Home() {
         payment: {
           transaction_type: "PAYMENT",
           order_id: "20220819105102",
-          currency: "USD",
+          currency: "KRW",
           amount: "1",
-          lang: "EN",
+          lang: "KR",
         },
         merchant: {
           mid: "1849705C64",
@@ -81,6 +81,7 @@ export default function Home() {
       <button type="button" onClick={handlePayment}>
         결제 창 연동
       </button>
+      <button onClick={() => alert("버튼")}>그냥 버튼</button>
     </div>
   );
 }
