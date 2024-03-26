@@ -68,6 +68,9 @@ export default function Home() {
           return_url: "eximbay.com",
           status_url: "eximbay.com",
         },
+        setting: {
+          call_from_app: "Y",
+        },
       });
     } else {
       console.error("EXIMBAY SDK not loaded");
