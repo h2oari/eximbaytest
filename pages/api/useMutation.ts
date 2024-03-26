@@ -32,5 +32,6 @@ export const getEximbayFgkey = async (data: EximbayFgkeyRequestData) => {
       },
     }
   );
+  console.log(response.data);
   return response.data;
 };
