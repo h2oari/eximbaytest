@@ -2,9 +2,9 @@ import axios from "axios";
 
 export interface EximbayFgkeyRequestData {
   payment: {
-    transaction_type: string;
-    order_id: string;
-    currency: string;
+    transaction_type?: string;
+    order_id?: string;
+    currency?: string;
     amount: string;
     lang: string;
   };
@@ -32,6 +32,5 @@ export const getEximbayFgkey = async (data: EximbayFgkeyRequestData) => {
       },
     }
   );
-  console.log(response.data);
   return response.data;
 };

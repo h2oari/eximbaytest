@@ -11,21 +11,14 @@ declare global {
 
 export default function Home() {
   const [fgkey, setFgkey] = useState<string | null>(null);
+  const userAgent = navigator.userAgent;
 
   const getEximbayFgkeyMutation = useMutation({
-    mutationFn: (userData: EximbayFgkeyRequestData) => {
+    mutationFn: (userData: any) => {
       return getEximbayFgkey(userData);
     },
   });
   const { isSuccess, data, mutateAsync } = getEximbayFgkeyMutation;
-
-  useEffect(() => {
-    if (window.EXIMBAY) {
-      alert("EXIMBAY SDK loaded");
-    } else {
-      console.error("EXIMBAY SDK not loaded");
-    }
-  }, []);
 
   useEffect(() => {
     if (isSuccess) {
@@ -33,25 +26,94 @@ export default function Home() {
     }
   }, [isSuccess, data?.fgkey]);
 
-  const handleClick = async (): Promise<void> => {
-    const reslut = await mutateAsync({
+  useEffect(() => {
+    alert(userAgent);
+    return;
+  }, [userAgent]);
+
+  const handleClick = async () => {
+    await mutateAsync({
       payment: {
         transaction_type: "PAYMENT",
         order_id: "20220819105102",
         currency: "KRW",
-        amount: "1",
+        amount: "100",
         lang: "KR",
+        payment_method: "P000",
       },
       merchant: {
         mid: "1849705C64",
+        shop: "가맹점명",
       },
       buyer: {
-        name: "eximbay",
-        email: "test@eximbay.com",
+        name: "손유정",
+        phone_number: "01022553219",
+        email: "ari.son@h2ohospitality.io",
       },
       url: {
         return_url: "eximbay.com",
         status_url: "eximbay.com",
+      },
+
+      tax: {
+        amount_tax_free: "10",
+        amount_taxable: "10",
+        amount_vat: "10",
+        amount_service_fee: "10",
+      },
+      otherParam: {
+        param1: "string",
+        param2: "string",
+      },
+      product: [
+        {
+          name: "상품명",
+          quantity: "1",
+          unit_price: "10000",
+        },
+      ],
+      surchargeArray: [
+        {
+          name: "쿠폰할인",
+          quantity: "1",
+          unit_price: "-10.00",
+        },
+        {
+          name: "배송비",
+          quantity: "1",
+          unit_price: "5.00",
+        },
+      ],
+      ship_to: {
+        city: "Seoul",
+        country: "KR",
+        first_name: "John",
+        last_name: "Doe",
+        phone_number: "010-1234-5678",
+        postal_code: "12345",
+        state: "",
+        street1: "123 Street, Apartment 45",
+      },
+      bill_to: {
+        city: "Seoul",
+        country: "KR",
+        first_name: "John",
+        last_name: "Doe",
+        phone_number: "010-1234-5678",
+        postal_code: "12345",
+        state: "",
+        street1: "123 Street, Apartment 45",
+      },
+      settings: {
+        displayType: "P",
+        autoclose: "Y",
+        callFromApp: "N",
+        issuerCountry: "KR",
+        ostype: "P",
+        site_foreign_currency: "",
+        call_from_app: userAgent ? "Y" : "N",
+        call_from_scheme: "",
+        issuer_country: "",
       },
     });
   };
@@ -64,22 +126,83 @@ export default function Home() {
           transaction_type: "PAYMENT",
           order_id: "20220819105102",
           currency: "KRW",
-          amount: "1",
+          amount: "100",
           lang: "KR",
+          payment_method: "P000",
         },
         merchant: {
           mid: "1849705C64",
+          shop: "가맹점명",
         },
         buyer: {
-          name: "eximbay",
-          email: "test@eximbay.com",
+          name: "손유정",
+          phone_number: "01022553219",
+          email: "ari.son@h2ohospitality.io",
         },
         url: {
           return_url: "eximbay.com",
           status_url: "eximbay.com",
         },
+
+        tax: {
+          amount_tax_free: "10",
+          amount_taxable: "10",
+          amount_vat: "10",
+          amount_service_fee: "10",
+        },
+        otherParam: {
+          param1: "string",
+          param2: "string",
+        },
+        product: [
+          {
+            name: "상품명",
+            quantity: "1",
+            unit_price: "10000",
+          },
+        ],
+        surchargeArray: [
+          {
+            name: "쿠폰할인",
+            quantity: "1",
+            unit_price: "-10.00",
+          },
+          {
+            name: "배송비",
+            quantity: "1",
+            unit_price: "5.00",
+          },
+        ],
+        ship_to: {
+          city: "Seoul",
+          country: "KR",
+          first_name: "John",
+          last_name: "Doe",
+          phone_number: "010-1234-5678",
+          postal_code: "12345",
+          state: "",
+          street1: "123 Street, Apartment 45",
+        },
+        bill_to: {
+          city: "Seoul",
+          country: "KR",
+          first_name: "John",
+          last_name: "Doe",
+          phone_number: "010-1234-5678",
+          postal_code: "12345",
+          state: "",
+          street1: "123 Street, Apartment 45",
+        },
         settings: {
-          display_type: "R",
+          displayType: "R",
+          autoclose: "Y",
+          callFromApp: "N",
+          issuerCountry: "KR",
+          ostype: "P",
+          site_foreign_currency: "",
+          call_from_app: userAgent ? "Y" : "N",
+          call_from_scheme: "",
+          issuer_country: "",
         },
       });
     } else {
@@ -94,7 +217,6 @@ export default function Home() {
       <button type="button" onClick={handlePayment}>
         결제 창 연동
       </button>
-      <button onClick={() => alert("버튼")}>그냥 버튼</button>
     </div>
   );
 }
