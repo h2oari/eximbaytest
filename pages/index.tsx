@@ -25,12 +25,6 @@ export default function Home() {
     }
   }, [isSuccess, data?.fgkey]);
 
-  useEffect(() => {
-    if (typeof navigator !== "undefined") {
-      alert(navigator.userAgent);
-    }
-  }, []);
-
   const handleClick = async () => {
     await mutateAsync({
       payment: {
@@ -112,7 +106,11 @@ export default function Home() {
         ostype: "P",
         site_foreign_currency: "",
         call_from_app:
-          typeof navigator !== "undefined" && navigator.userAgent ? "Y" : "N",
+          typeof navigator !== "undefined" &&
+          (/Android/.test(navigator.userAgent) ||
+            /iPad|iPhone|iPod/.test(navigator.userAgent))
+            ? "Y"
+            : "N",
         call_from_scheme: "",
         issuer_country: "",
       },
@@ -202,7 +200,11 @@ export default function Home() {
           ostype: "P",
           site_foreign_currency: "",
           call_from_app:
-            typeof navigator !== "undefined" && navigator.userAgent ? "Y" : "N",
+            typeof navigator !== "undefined" &&
+            (/Android/.test(navigator.userAgent) ||
+              /iPad|iPhone|iPod/.test(navigator.userAgent))
+              ? "Y"
+              : "N",
           call_from_scheme: "",
           issuer_country: "",
         },
