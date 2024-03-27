@@ -214,25 +214,22 @@ export default function Home() {
     }
   };
   useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.src = "https://code.jquery.com/jquery-1.12.4.min.js";
-    script1.defer = true;
-    document.body.appendChild(script1);
+    const handleMessage = (event: any) => {
+      const message = event.data;
+      console.log("Message received in Next.js:", message);
+    };
 
-    const script2 = document.createElement("script");
-    script2.src = "https://api-test.eximbay.com/v1/javascriptSDK.js";
-    script2.defer = true;
-    document.body.appendChild(script2);
+    window.addEventListener("message", handleMessage);
 
     return () => {
-      document.body.removeChild(script1);
-      document.body.removeChild(script2);
+      window.removeEventListener("message", handleMessage);
     };
   }, []);
+
   return (
     <div>
-      <Script src="https://code.jquery.com/jquery-1.12.4.min.js" defer />
-      <Script src="https://api-test.eximbay.com/v1/javascriptSDK.js" defer />
+      <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer />
+      <script src="https://api-test.eximbay.com/v1/javascriptSDK.js" defer />
       <button onClick={handleClick}>fgkey 생성</button>
       <button type="button" onClick={handlePayment}>
         결제 창 연동
