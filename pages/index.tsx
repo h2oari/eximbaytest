@@ -18,6 +18,15 @@ export default function Home() {
     },
   });
   const { isSuccess, data, mutateAsync } = getEximbayFgkeyMutation;
+
+  useEffect(() => {
+    if (window.EXIMBAY) {
+      alert("EXIMBAY SDK loaded");
+    } else {
+      console.error("EXIMBAY SDK not loaded");
+    }
+  }, []);
+
   useEffect(() => {
     if (isSuccess) {
       setFgkey(data?.fgkey);
@@ -25,7 +34,7 @@ export default function Home() {
   }, [isSuccess, data?.fgkey]);
 
   const handleClick = async (): Promise<void> => {
-    await mutateAsync({
+    const reslut = await mutateAsync({
       payment: {
         transaction_type: "PAYMENT",
         order_id: "20220819105102",
@@ -46,6 +55,7 @@ export default function Home() {
       },
     });
   };
+
   const handlePayment = () => {
     if (window.EXIMBAY) {
       window.EXIMBAY.request_pay({
@@ -68,8 +78,8 @@ export default function Home() {
           return_url: "eximbay.com",
           status_url: "eximbay.com",
         },
-        setting: {
-          call_from_app: "Y",
+        settings: {
+          display_type: "R",
         },
       });
     } else {
