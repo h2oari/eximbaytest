@@ -27,9 +27,10 @@ export default function Home() {
   const userAgent = navigator?.userAgent;
 
   useEffect(() => {
-    alert(userAgent);
-    return;
-  }, [userAgent]);
+    if (typeof navigator !== "undefined") {
+      alert(navigator.userAgent);
+    }
+  }, []);
 
   const handleClick = async () => {
     await mutateAsync({
