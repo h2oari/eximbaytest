@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { EximbayFgkeyRequestData, getEximbayFgkey } from "./api/useMutation";
+import { getEximbayFgkey } from "./api/useMutation";
 import Script from "next/script";
 
 declare global {
@@ -8,10 +8,10 @@ declare global {
     EXIMBAY: any;
   }
 }
+const userAgent = navigator.userAgent;
 
 export default function Home() {
   const [fgkey, setFgkey] = useState<string | null>(null);
-  const userAgent = navigator.userAgent;
 
   const getEximbayFgkeyMutation = useMutation({
     mutationFn: (userData: any) => {
