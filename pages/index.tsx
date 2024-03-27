@@ -24,7 +24,6 @@ export default function Home() {
       setFgkey(data?.fgkey);
     }
   }, [isSuccess, data?.fgkey]);
-  const userAgent = navigator?.userAgent;
 
   useEffect(() => {
     if (typeof navigator !== "undefined") {
@@ -112,7 +111,8 @@ export default function Home() {
         issuerCountry: "KR",
         ostype: "P",
         site_foreign_currency: "",
-        call_from_app: userAgent ? "Y" : "N",
+        call_from_app:
+          typeof navigator !== "undefined" && navigator.userAgent ? "Y" : "N",
         call_from_scheme: "",
         issuer_country: "",
       },
@@ -201,7 +201,8 @@ export default function Home() {
           issuerCountry: "KR",
           ostype: "P",
           site_foreign_currency: "",
-          call_from_app: userAgent ? "Y" : "N",
+          call_from_app:
+            typeof navigator !== "undefined" && navigator.userAgent ? "Y" : "N",
           call_from_scheme: "",
           issuer_country: "",
         },
