@@ -8,7 +8,6 @@ declare global {
     EXIMBAY: any;
   }
 }
-const userAgent = navigator.userAgent;
 
 export default function Home() {
   const [fgkey, setFgkey] = useState<string | null>(null);
@@ -25,6 +24,7 @@ export default function Home() {
       setFgkey(data?.fgkey);
     }
   }, [isSuccess, data?.fgkey]);
+  const userAgent = navigator?.userAgent;
 
   useEffect(() => {
     alert(userAgent);
