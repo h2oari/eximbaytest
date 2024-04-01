@@ -74,6 +74,7 @@ export default function Home() {
       <script src="https://code.jquery.com/jquery-1.12.4.min.js" defer />
       <script src="https://api-test.eximbay.com/v1/javascriptSDK.js" defer />
       <button onClick={handleClick}>fgkey 생성</button>
+      {isSuccess && <p>{data}</p>}
     </div>
   );
 }
