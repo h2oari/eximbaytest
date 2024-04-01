@@ -23,14 +23,13 @@ export interface EximbayFgkeyRequestData {
 
 export const getEximbayFgkey = async (data: EximbayFgkeyRequestData) => {
   const response = await axios.post(
-    `https://api-test.eximbay.com/v1/payments/ready`,
+    "https://a6a9-121-138-151-6.ngrok-free.app/api/payments/ready",
     data,
     {
       headers: {
-        Authorization: "Basic dGVzdF8xODQ5NzA1QzY0MkMyMTdFMEIyRDo=",
-        "Content-Type": "application/json",
+        "api-key": "MjpFWElNQkFZX1RFU1Q=",
       },
     }
   );
-  return response.data;
+  return response.data.data;
 };
